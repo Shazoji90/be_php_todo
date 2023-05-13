@@ -12,6 +12,7 @@ if(isset($_POST['todo'])) {
         'status' => 0
     ];
     file_put_contents('todo.txt', serialize($todos));
+    header('Location:/');
 }
 
 ?>
