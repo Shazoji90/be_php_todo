@@ -1,8 +1,10 @@
 <?php
 $todos = [];
+$file = file_get_contents('todo.txt');
+$todos = unserialize($file);
 if(isset($_POST['todo'])) {
     $data = $_POST['todo'];
-    $todos[] = [
+    $todos[] = [    //membuat baris baru
         'todo' => $data,
         'status' => 0
     ];
