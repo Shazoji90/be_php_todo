@@ -44,7 +44,7 @@ print_r($todos);
     <li>
         <input type="checkbox" name="todo" onclick="window.location.href = '/?status=<?= ($value['status'] == 0) ? 1 : 0; ?>&key=<?= $key; ?>'" <?= ($value['status'] == 1) ? 'checked' : ''; ?>/>
         <label><?= ($value['status'] == 1) ? "<del>".$value['todo']."</del>" : $value['todo']; ?></label>
-        <a href="/?hapus=1&key=<?= $key; ?>">hapus</a>
+        <a href="/?hapus=1&key=<?= $key; ?>" onclick="return confirm('Apakah Anda yakin akan menghapus todo ini?')">hapus</a>
     </li>
     <?php endforeach; ?>
 </ul>
