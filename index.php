@@ -1,7 +1,10 @@
 <?php
 $todos = [];
-$file = file_get_contents('todo.txt');
-$todos = unserialize($file);
+if(file_exists('todo.txt')) { //pengecekan jika file todo.txt tidak ada
+    $file = file_get_contents('todo.txt');
+    $todos = unserialize($file);
+}
+
 if(isset($_POST['todo'])) {
     $data = $_POST['todo'];
     $todos[] = [    //membuat baris baru
