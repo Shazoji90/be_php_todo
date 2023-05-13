@@ -21,6 +21,12 @@ if(isset($_GET['status'])) {
     header('Location:/');
 }
 
+if(isset($_GET['hapus'])) {
+    unset($todos[$_GET['key']]);
+    file_put_contents('todo.txt', serialize($todos));
+    header('Location:/');
+}
+
 print_r($todos);
 
 ?>
@@ -38,7 +44,7 @@ print_r($todos);
     <li>
         <input type="checkbox" name="todo" onclick="window.location.href = '/?status=<?= ($value['status'] == 0) ? 1 : 0; ?>&key=<?= $key; ?>'" <?= ($value['status'] == 1) ? 'checked' : ''; ?>/>
         <label><?= ($value['status'] == 1) ? "<del>".$value['todo']."</del>" : $value['todo']; ?></label>
-        <a href="#">hapus</a>
+        <a href="/?hapus=1&key=<?= $key; ?>">hapus</a>
     </li>
     <?php endforeach; ?>
 </ul>
