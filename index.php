@@ -15,6 +15,14 @@ if(isset($_POST['todo'])) {
     header('Location:/');
 }
 
+if(isset($_GET['status'])) {
+    $todos[$_GET['key']]['status'] = $_GET['status'];
+    file_put_contents('todo.txt', serialize($todos));
+    header('Location:/');
+}
+
+print_r($todos);
+
 ?>
 
 <h1>Todo App</h1>
@@ -28,8 +36,8 @@ if(isset($_POST['todo'])) {
 <ul>
     <?php foreach($todos as $key => $value): ?>
     <li>
-        <input type="checkbox" name="todo"/>
-        <label><?= $value['todo']; ?></label>
+        <input type="checkbox" name="todo" onclick="window.location.href = '/?status=<?= ($value['status'] == 0) ? 1 : 0; ?>&key=<?= $key; ?>'" <?= ($value['status'] == 1) ? 'checked' : ''; ?>/>
+        <label><?= ($value['status'] == 1) ? "<del>".$value['todo']."</del>" : $value['todo']; ?></label>
         <a href="#">hapus</a>
     </li>
     <?php endforeach; ?>
