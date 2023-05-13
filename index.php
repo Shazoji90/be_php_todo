@@ -11,23 +11,24 @@ if(isset($_POST['todo'])) {
         'todo' => $data,
         'status' => 0
     ];
-    file_put_contents('todo.txt', serialize($todos));
-    header('Location:/');
+    saveData($todos);
 }
 
 if(isset($_GET['status'])) {
     $todos[$_GET['key']]['status'] = $_GET['status'];
-    file_put_contents('todo.txt', serialize($todos));
-    header('Location:/');
+    saveData($todos);
 }
 
 if(isset($_GET['hapus'])) {
     unset($todos[$_GET['key']]);
+    saveData($todos);
+}
+
+function saveData($todos)
+{
     file_put_contents('todo.txt', serialize($todos));
     header('Location:/');
 }
-
-print_r($todos);
 
 ?>
 
